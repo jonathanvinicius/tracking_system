@@ -1,4 +1,5 @@
 export interface CreateRouteDto {
+  id?: string;
   source_id?: string;
   destination_id?: string;
   name: string;
