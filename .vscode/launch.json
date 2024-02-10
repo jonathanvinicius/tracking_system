@@ -1,0 +1,17 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node-terminal",
+            "name": "Debug tracking system app",
+            "request": "launch",
+            "command": "npm run start:dev",
+            "cwd": "${workspaceFolder}/nestjs",
+            "skipFiles": [
+                "<node_internals>/**",
+                "${workspaceFolder}/node_modules/**"
+            ]
+        }
+    ]
+  }
+  
