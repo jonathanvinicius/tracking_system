@@ -5,12 +5,17 @@ import { Route } from './models/routes';
 import { Repository } from 'typeorm';
 import { plainToClass } from 'class-transformer';
 import { DirectionsService } from 'src/maps/directions/directions.service';
+import { InjectQueue } from '@nestjs/bull';
+import { Queue } from 'bull';
+import { v4 as uuid } from 'uuid';
 
 @Injectable()
 export class RoutesService {
   constructor(
     @InjectRepository(Route) private routeRepo: Repository<Route>,
     private directionsService: DirectionsService,
+
+    @InjectQueue('kafka-producer') private kafkaProducerQueue: Queue,
   ) {}
 
   async create(createRouteDto: CreateRouteDto) {
@@ -21,7 +26,9 @@ export class RoutesService {
       );
 
     const legs = routes[0].legs[0];
+    const routeId = uuid();
     const requestParams: CreateRouteDto = {
+      id: routeId,
       name: createRouteDto.name,
       source: {
         name: legs.start_address,
@@ -47,6 +54,14 @@ export class RoutesService {
       }),
     };
     const newRoute = this.routeRepo.create(plainToClass(Route, requestParams));
+
+    await this.kafkaProducerQueue.add({
+      event: 'RouteCreated',
+      id: routeId,
+      name: newRoute.name,
+      distance: newRoute.distance,
+    });
+
     return this.routeRepo.save(newRoute);
   }
 
