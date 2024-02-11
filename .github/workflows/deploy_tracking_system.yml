@@ -16,7 +16,7 @@ jobs:
       run: |
         cd tracking_system/nestjs
         npm install
-        npm run build
+        npm run build -- --verbose
 
     - name: Authenticate to Google Cloud
       uses: google-github-actions/auth@v2
