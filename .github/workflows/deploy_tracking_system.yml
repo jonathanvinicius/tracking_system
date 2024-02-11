@@ -17,7 +17,7 @@ jobs:
       run: echo "$GCP_SA_KEY" | base64 -d > gcp-sa-key.json
     
     - name: Setup Google Cloud CLI
-      uses: google-github-actions/setup-gcloud@master
+      uses: google-github-actions/setup-gcloud@v0.2.0 # Use a versão específica
       with:
         project_id: ${{ secrets.GCP_PROJECT_ID }}
         service_account_file: gcp-sa-key.json
