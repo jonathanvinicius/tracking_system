@@ -16,7 +16,8 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: '20'
-      - name: List directories
+  
+    - name: List directories
       run: ls -la
 
     # Instala as dependências e executa o build
