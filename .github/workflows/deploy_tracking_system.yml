@@ -25,6 +25,7 @@ jobs:
       run: |
         ls -la nestjs
 
+
     # Instala as dependências e executa o build
     - name: Install dependencies and build the project
       run: |
@@ -33,6 +34,10 @@ jobs:
         npm run build
         cp package.json dist/
         cp package-lock.json dist/ 
+  
+    - name: List build directory content
+      run: |
+        ls -la nestjs/dist
 
     - name: Authenticate to Google Cloud
       uses: google-github-actions/auth@v2
