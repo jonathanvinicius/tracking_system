@@ -11,10 +11,13 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
+    # Cria o arquivo da chave da conta de serviço a partir da secret
     - name: Create Service Account Key File
-      run: echo '${{ secrets.GCP_SA_KEY_JSON }}' > gcp-sa-key.json
+      run: |
+        echo '${{ secrets.GCP_SA_KEY_JSON }}' > gcp-sa-key.json
       shell: bash
     
+    # Configura o gcloud CLI
     - name: Setup Google Cloud CLI
       uses: google-github-actions/setup-gcloud@v0.2.0
       with:
@@ -22,6 +25,7 @@ jobs:
         service_account_file: gcp-sa-key.json
         export_default_credentials: true
     
+    # Deploy da função Cloud Functions
     - name: Deploy Routes Service to Cloud Functions
       run: |
         gcloud functions deploy routes-service --entry-point api --runtime nodejs16 --trigger-http --allow-unauthenticated --region southamerica-east1 --source=nestjs/src/routes
