@@ -1,8 +1,18 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { ExpressAdapter } from '@nestjs/platform-express';
+import * as express from 'express';
 
-async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { cors: true });
-  await app.listen(3000);
+const expressApp = express();
+const adapter = new ExpressAdapter(expressApp);
+
+async function createNestApplication() {
+  const app = await NestFactory.create(AppModule, adapter);
+  await app.init();
 }
-bootstrap();
+
+// Imediatamente invoca a função para inicializar a aplicação NestJS
+createNestApplication();
+
+// Exporta a aplicação Express para o Cloud Functions tratar como seu ponto de entrada
+exports.api = expressApp;
