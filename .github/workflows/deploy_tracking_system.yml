@@ -23,12 +23,6 @@ jobs:
         project_id: ${{ secrets.GCP_PROJECT_ID }}
         service_account_file: gcp-sa-key.json
         export_default_credentials: true
-  
-     # Teste de Autenticação
-    - name: Test Authentication
-      run: |
-        gcloud projects list
-      shell: bash
 
     # Deploy da Cloud Function
     - name: Deploy Routes Service to Cloud Functions
