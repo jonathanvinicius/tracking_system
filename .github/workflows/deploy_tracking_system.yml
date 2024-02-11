@@ -27,15 +27,14 @@ jobs:
 
 
     # Instala as dependências e executa o build
-    - name: Install dependencies and build the project
-      run: |
-        cd nestjs
-        npm install
-        npm run build
-        cp package.json dist/src
-        cp package-lock.json dist/src 
-        cp tsconfig.json dist/src/tsconfig.json
-        cp package.json dist/src/package.json
+   - name: Install dependencies and build the project
+    run: |
+      cd nestjs
+      npm install
+      npm run build
+      cp package.json dist/
+      cp package-lock.json dist/ 
+     
   
     - name: List build directory content
       run: |
@@ -49,4 +48,4 @@ jobs:
     # Deploy da função Cloud Functions com o código compilado
     - name: Deploy Routes Service to Cloud Functions
       run: |
-        gcloud functions deploy routes-service --entry-point api --runtime nodejs20 --trigger-http --allow-unauthenticated --region southamerica-east1 --source=nestjs/dist/src --gen2
+        gcloud functions deploy routes-service --entry-point api --runtime nodejs20 --trigger-http --allow-unauthenticated --region southamerica-east1 --source=nestjs/dist --gen2
