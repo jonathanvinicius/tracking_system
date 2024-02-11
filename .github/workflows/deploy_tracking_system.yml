@@ -21,6 +21,10 @@ jobs:
     - name: List directories
       run: ls -la
 
+    - name: List nestjs directory content
+      run: |
+        ls -la nestjs
+
     # Instala as dependências e executa o build
     - name: Install dependencies and build the project
       run: |
