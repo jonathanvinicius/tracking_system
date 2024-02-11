@@ -8,6 +8,7 @@ on:
 jobs:
   deploy-routes:
     runs-on: ubuntu-latest
+    environment: GCP
     steps:
     - uses: actions/checkout@v2
 
