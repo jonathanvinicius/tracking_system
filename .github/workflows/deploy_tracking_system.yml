@@ -32,8 +32,8 @@ jobs:
         cd nestjs
         npm install
         npm run build
-        cp package.json dist/
-        cp package-lock.json dist/ 
+        cp package.json dist/src
+        cp package-lock.json dist/src 
         cp tsconfig.json dist/tsconfig.json
         cp package.json dist/package.json
   
