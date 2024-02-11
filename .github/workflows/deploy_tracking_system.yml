@@ -1,0 +1,35 @@
+name: Deploy NestJS Services to Google Cloud Functions
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy-routes:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup Google Cloud CLI
+      uses: google-github-actions/setup-gcloud@v0.2.0
+      with:
+        project_id: ${{ secrets.GCP_PROJECT_ID }}
+        service_account_key: ${{ secrets.GCP_SA_KEY }}
+        export_default_credentials: true
+    - name: Deploy Routes Service to Cloud Functions
+      run: |
+        gcloud functions deploy routes-service --entry-point api --runtime nodejs20 --trigger-http --allow-unauthenticated --region southamerica-east1 --source=nestjs/src/routes
+
+  deploy-routes-driver:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup Google Cloud CLI
+      uses: google-github-actions/setup-gcloud@v0.2.0
+      with:
+        project_id: ${{ secrets.GCP_PROJECT_ID }}
+        service_account_key: ${{ secrets.GCP_SA_KEY }}
+        export_default_credentials: true
+    - name: Deploy Routes Driver Service to Cloud Functions
+      run: |
+        gcloud functions deploy routes-driver-service --entry-point api --runtime nodejs20 --trigger-http --allow-unauthenticated --region southamerica-east1 --source=nestjs/src/routes/routes-driver
