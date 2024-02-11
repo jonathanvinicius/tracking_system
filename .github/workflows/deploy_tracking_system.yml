@@ -34,8 +34,8 @@ jobs:
         npm run build
         cp package.json dist/
         cp package-lock.json dist/ 
-        cp nestjs/tsconfig.json nestjs/dist/tsconfig.json
-        cp nestjs/package.json nestjs/dist/package.json
+        cp tsconfig.json dist/tsconfig.json
+        cp package.json dist/package.json
   
     - name: List build directory content
       run: |
