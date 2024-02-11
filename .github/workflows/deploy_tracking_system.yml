@@ -11,19 +11,32 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
+    # Decodifica a chave da conta de serviço do GCP diretamente para um arquivo
     - name: Decode GCP Service Account Key
-      env:
-        GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
-      run: echo "$GCP_SA_KEY" | base64 -d > gcp-sa-key.json
+      run: echo "${{ secrets.GCP_SA_KEY }}" | base64 -d > gcp-sa-key.json
+      shell: bash
     
+    # Configura o gcloud CLI usando a ação do GitHub
     - name: Setup Google Cloud CLI
-      uses: google-github-actions/setup-gcloud@v0.2.0 # Use a versão específica
+      uses: google-github-actions/setup-gcloud@v0.2.0
       with:
         project_id: ${{ secrets.GCP_PROJECT_ID }}
         service_account_file: gcp-sa-key.json
         export_default_credentials: true
-    
+  
+     # Teste de Autenticação
+    - name: Test Authentication
+      run: |
+        gcloud projects list
+      shell: bash
+
     - name: Deploy Routes Service to Cloud Functions
       run: |
-        gcloud functions deploy routes-service --entry-point api --runtime nodejs20 --trigger-http --allow-unauthenticated --region southamerica-east1 --source=nestjs/src/routes
-  
+        gcloud functions deploy routes-service --entry-point api --runtime nodejs16 --trigger-http --allow-unauthenticated --region southamerica-east1 --source=nestjs/src/routes
+      shell: bash
+    
+    # Deploy da Cloud Function
+    - name: Deploy Routes Service to Cloud Functions
+      run: |
+        gcloud functions deploy routes-service --entry-point api --runtime nodejs16 --trigger-http --allow-unauthenticated --region southamerica-east1 --source=nestjs/src/routes
+      shell: bash
