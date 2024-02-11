@@ -1,3 +1,10 @@
+name: Deploy NestJS Services to Google Cloud Functions
+
+on:
+  push:
+    branches:
+      - main
+
 jobs:
   deploy-routes:
     runs-on: ubuntu-latest
