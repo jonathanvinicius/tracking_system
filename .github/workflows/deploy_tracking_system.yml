@@ -11,21 +11,18 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
-    # Decodificar a chave da conta de serviço
     - name: Decode GCP Service Account Key
       env:
         GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
       run: echo "$GCP_SA_KEY" | base64 -d > gcp-sa-key.json
     
-    # Setup do Google Cloud CLI usando a chave decodificada
     - name: Setup Google Cloud CLI
-      uses: google-github-actions/setup-gcloud@v0.2.0
+      uses: google-github-actions/setup-gcloud@master
       with:
         project_id: ${{ secrets.GCP_PROJECT_ID }}
         service_account_file: gcp-sa-key.json
         export_default_credentials: true
     
-    # Deploy da Cloud Function
     - name: Deploy Routes Service to Cloud Functions
       run: |
         gcloud functions deploy routes-service --entry-point api --runtime nodejs20 --trigger-http --allow-unauthenticated --region southamerica-east1 --source=nestjs/src/routes
