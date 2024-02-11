@@ -32,7 +32,9 @@ jobs:
         npm install
         npm run build
         cp package.json dist/src
-        cp package-lock.json dist/src
+        cp package-lock.json dist/src 
+        cp tsconfig.json dist/src/tsconfig.json
+        cp package.json dist/src/package.json
      
   
     - name: List build directory content
