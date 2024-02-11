@@ -39,7 +39,7 @@ jobs:
   
     - name: List build directory content
       run: |
-        ls -la nestjs/dist
+        ls -la nestjs/dist/src
 
     - name: Authenticate to Google Cloud
       uses: google-github-actions/auth@v2
