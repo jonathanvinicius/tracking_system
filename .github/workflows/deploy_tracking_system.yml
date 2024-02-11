@@ -10,15 +10,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    with:
-      node-version: '20'
+
+    # Configura a versão do Node.js
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '20'
 
     # Instala as dependências e executa o build
     - name: Install dependencies and build the project
       run: |
         cd tracking_system/nestjs
         npm install
-        npm run build
+        npm run build --verbose
 
     - name: Authenticate to Google Cloud
       uses: google-github-actions/auth@v2
