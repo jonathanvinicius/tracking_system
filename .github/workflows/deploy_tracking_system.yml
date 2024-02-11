@@ -23,7 +23,7 @@ jobs:
     # Instala as dependências e executa o build
     - name: Install dependencies and build the project
       run: |
-        cd tracking_system/nestjs
+        cd nestjs
         npm install
          npm run build -- --verbose
 
@@ -35,4 +35,4 @@ jobs:
     # Deploy da função Cloud Functions com o código compilado
     - name: Deploy Routes Service to Cloud Functions
       run: |
-        gcloud functions deploy routes-service --entry-point api --runtime nodejs20 --trigger-http --allow-unauthenticated --region southamerica-east1 --source=tracking_system/nestjs/dist --gen2
+        gcloud functions deploy routes-service --entry-point api --runtime nodejs20 --trigger-http --allow-unauthenticated --region southamerica-east1 --source=nestjs/dist --gen2
