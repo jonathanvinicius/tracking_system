@@ -26,6 +26,4 @@ jobs:
     - name: Deploy Routes Service to Cloud Functions
       run: |
         gcloud functions deploy routes-service --entry-point api --runtime nodejs20 --trigger-http --allow-unauthenticated --region southamerica-east1 --source=nestjs/src/routes
-    - name: Debug Cloud Functions
-      run: |
-        gcloud functions deploy ... --verbosity=debug
+  
