@@ -30,11 +30,6 @@ jobs:
         gcloud projects list
       shell: bash
 
-    - name: Deploy Routes Service to Cloud Functions
-      run: |
-        gcloud functions deploy routes-service --entry-point api --runtime nodejs16 --trigger-http --allow-unauthenticated --region southamerica-east1 --source=nestjs/src/routes
-      shell: bash
-    
     # Deploy da Cloud Function
     - name: Deploy Routes Service to Cloud Functions
       run: |
