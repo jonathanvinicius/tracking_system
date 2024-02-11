@@ -9,19 +9,22 @@ jobs:
   deploy-routes:
     runs-on: ubuntu-latest
     steps:
-    # Configura o gcloud CLI
-    - name: Setup Google Cloud CLI
-    - id: 'auth'
-      uses: 'google-github-actions/auth@v2'
-      with:
-        credentials_json: '${{ secrets.GCP_SA_KEY_JSON }}'
+      - uses: actions/checkout@v2
 
-    - name: 'Set up Cloud SDK'
-      uses: 'google-github-actions/setup-gcloud@v2'
+      # Cria o arquivo da chave da conta de serviço a partir da secret
+      - name: Create Service Account Key File
+        run: |
+          echo '${{ secrets.GCP_SA_KEY_JSON }}' > gcp-sa-key.json
+        shell: bash
 
-    - name: 'Use gcloud CLI'
-      run: 'gcloud info'
-    
+      # Configura o gcloud CLI
+      - name: Setup Google Cloud CLI
+        uses: google-github-actions/setup-gcloud@v0.2.0
+        with:
+          service_account_key: ${{ secrets.GCP_SA_KEY_JSON }}
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          export_default_credentials: true
+  
     # Deploy da função Cloud Functions
     - name: Deploy Routes Service to Cloud Functions
       run: |
