@@ -17,13 +17,6 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: '20'
-  
-    - name: List directories
-      run: ls -la
-
-    - name: List nestjs directory content
-      run: |
-        ls -la nestjs
 
     # Instala as dependências e executa o build
     - name: Install dependencies and build the project
@@ -35,11 +28,12 @@ jobs:
         cp package-lock.json dist/src 
         cp tsconfig.json dist/src/tsconfig.json
         cp package.json dist/src/package.json
-     
-  
-    - name: List build directory content
+    
+    # Executa as migrações do banco de dados
+    - name: Run database migrations
       run: |
-        ls -la nestjs/dist/src
+        cd nestjs
+        npm run typeorm migration:run
 
     - name: Authenticate to Google Cloud
       uses: google-github-actions/auth@v2
