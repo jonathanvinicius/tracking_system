@@ -21,7 +21,7 @@
     "typeorm": "ts-node ./node_modules/typeorm/cli.js",
     "migration:create": "cd src/migrations && npx typeorm-ts-node-commonjs migration:create",
     "model:create": "cd src/models && npx typeorm-ts-node-commonjs entity:create",
-    "migrations": "npm run typeorm migration:run -- -d ./typeorm.config.ts"
+    "migration:run": "npm run typeorm migration:run -- -d ./typeorm.config.ts"
   },
   "dependencies": {
     "@bull-board/api": "^5.13.0",
