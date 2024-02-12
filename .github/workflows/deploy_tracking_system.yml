@@ -33,7 +33,7 @@ jobs:
     - name: Run database migrations
       run: |
         cd nestjs
-        npm run typeorm migration:run
+        npm run migrations:run
 
     - name: Authenticate to Google Cloud
       uses: google-github-actions/auth@v2
