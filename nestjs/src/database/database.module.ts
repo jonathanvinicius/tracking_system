@@ -7,15 +7,15 @@ import { Route } from 'src/routes/models/routes';
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({
-      useFactory: (configService: ConfigService) => ({
+      useFactory: () => ({
         type: 'mysql',
-        host: configService.getOrThrow('MYSQL_HOST'),
-        port: configService.getOrThrow('MYSQL_PORT'),
-        database: configService.getOrThrow('MYSQL_DATABASE'),
-        username: configService.getOrThrow('MYSQL_USERNAME'),
-        password: configService.getOrThrow('MYSQL_PASSWORD'),
+        host: '34.95.150.244',
+        port: 3306,
+        database: 'tracking_system',
+        username: 'jonathan',
+        password: '78951Root.',
         autoLoadEntities: true,
-        synchronize: configService.getOrThrow('MYSQL_SYNCHRONIZE'),
+        synchronize: true,
         entities: [Route, RouteDriver],
       }),
       inject: [ConfigService],
