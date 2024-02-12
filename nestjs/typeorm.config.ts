@@ -8,11 +8,11 @@ const configService = new ConfigService();
 
 export default new DataSource({
   type: 'mysql',
-  host: configService.getOrThrow('MYSQL_HOST'),
-  port: configService.getOrThrow('MYSQL_PORT'),
-  database: configService.getOrThrow('MYSQL_DATABASE'),
-  username: configService.getOrThrow('MYSQL_USERNAME'),
-  password: configService.getOrThrow('MYSQL_PASSWORD'),
+  host: configService.getOrThrow('34.95.150.244'),
+  port: configService.getOrThrow('3306'),
+  database: configService.getOrThrow('tracking_system'),
+  username: configService.getOrThrow('jonathan'),
+  password: configService.getOrThrow('78951Root.'),
   migrations: ['src/migrations/**/*.ts'],
   entities: [],
 });
