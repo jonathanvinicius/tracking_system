@@ -14,11 +14,13 @@ import { RouteKafkaProducerJob } from './route-kafka-producer.job';
 import { BullBoardModule } from '@bull-board/nestjs';
 import { BullMQAdapter } from '@bull-board/api/bullMQAdapter';
 import { makeCounterProvider } from '@willsoto/nestjs-prometheus';
+// import { MemcachedModule } from 'src/memcached/memcached.module';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([Route, RouteDriver]),
     MapsModule,
+    // MemcachedModule,
     BullModule.registerQueue(
       {
         name: 'new-points-route-driver',
@@ -64,7 +66,7 @@ import { makeCounterProvider } from '@willsoto/nestjs-prometheus';
         options: {
           client: {
             clientId: 'nest',
-            brokers: ['localhost:9094'],
+            brokers: ['35.237.123.121:9092'],
           },
         },
       },
