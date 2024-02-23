@@ -2,17 +2,23 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ExpressAdapter } from '@nestjs/platform-express';
 import * as express from 'express';
+import * as cors from 'cors';
 
 const expressApp = express();
 const adapter = new ExpressAdapter(expressApp);
 
 async function createNestApplication() {
   const app = await NestFactory.create(AppModule, adapter);
+  app.use(cors());
   await app.init();
 }
-
-// Imediatamente invoca a função para inicializar a aplicação NestJS
-createNestApplication();
-
-// Exporta a aplicação Express para o Cloud Functions tratar como seu ponto de entrada
 exports.api = expressApp;
+
+if (process.env.NODE_ENV === 'localhost') {
+  createNestApplication().then(() => {
+    const PORT = process.env.PORT || 3000;
+    expressApp.listen(PORT, () => {
+      console.log(`Server is running on http://localhost:${PORT}`);
+    });
+  });
+}
