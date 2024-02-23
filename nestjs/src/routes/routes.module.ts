@@ -66,7 +66,7 @@ import { makeCounterProvider } from '@willsoto/nestjs-prometheus';
         options: {
           client: {
             clientId: 'nest',
-            brokers: ['35.237.123.121:9092'],
+            brokers: ['localhost:9092'],
           },
         },
       },
