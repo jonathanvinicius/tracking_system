@@ -10,9 +10,13 @@ async function createNestApplication() {
   const app = await NestFactory.create(AppModule, adapter);
   await app.init();
 }
-
-// Imediatamente invoca a função para inicializar a aplicação NestJS
-createNestApplication();
-
-// Exporta a aplicação Express para o Cloud Functions tratar como seu ponto de entrada
 exports.api = expressApp;
+
+if (process.env.NODE_ENV === 'localhost') {
+  createNestApplication().then(() => {
+    const PORT = process.env.PORT || 3000;
+    expressApp.listen(PORT, () => {
+      console.log(`Server is running on http://localhost:${PORT}`);
+    });
+  });
+}
