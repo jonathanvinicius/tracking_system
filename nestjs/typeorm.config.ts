@@ -8,11 +8,11 @@ config();
 
 export default new DataSource({
   type: 'mysql',
-  host: '34.95.150.244',
+  host: 'your_host',
   port: 3306,
-  database: 'tracking_system',
-  username: 'jonathan',
-  password: '78951Root.',
+  database: 'your_db',
+  username: 'your_username',
+  password: 'your_password',
   migrations: ['src/migrations/**/*.ts'],
   entities: [],
 });
