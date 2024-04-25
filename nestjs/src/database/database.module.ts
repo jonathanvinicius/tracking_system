@@ -9,11 +9,11 @@ import { Route } from 'src/routes/models/routes';
     TypeOrmModule.forRootAsync({
       useFactory: () => ({
         type: 'mysql',
-        host: '34.95.150.244',
+        host: 'host',
         port: 3306,
-        database: 'tracking_system',
-        username: 'jonathan',
-        password: '78951Root.',
+        database: 'your_database',
+        username: 'your_username',
+        password: 'your_password',
         autoLoadEntities: true,
         synchronize: true,
         entities: [Route, RouteDriver],
