@@ -2,23 +2,15 @@
 
 ## Descrição
 
-Repositório do front-end feito com Next.js (Front-end)
+Repositório do back-end feito com Nest.js (Backend)
+
+## Para Mac M1
+
+Vide `docker-compose.yaml` no projeto para ativar a configuração do MongoDB corretamente para rodar o banco de dados.
 
 ## Google API Key
 
 Gere uma API Key no painel do Google Console, é necessário ativar o serviço de `Google Maps API`.
-
-
-## Configurar /etc/hosts
-
-A comunicação entre as aplicações se dá de forma direta através da rede da máquina.
-Para isto é necessário configurar um endereços que todos os containers Docker consigam acessar.
-
-Acrescente no seu /etc/hosts (para Windows o caminho é C:\Windows\system32\drivers\etc\hosts):
-```
-127.0.0.1 host.docker.internal
-```
-Em todos os sistemas operacionais é necessário abrir o programa para editar o *hosts* como Administrator da máquina ou root.
 
 ## Rodar a aplicação
 
@@ -36,14 +28,17 @@ docker compose exec app bash
 E configure as dependências iniciais (rode somente dentro do container do Docker):
 ```
 npm install
+npx prisma generate
 ```
 
 Rode a aplicação (rode somente dentro do container do Docker):
 ```bash
-npm run dev
+npm run start:dev
 ```
 
-Acessar http://localhost:3001.
+Acessar http://localhost:3001/routes.
+
+Existe um arquivo na raiz do projeto Nest.js, o `api.http` que você pode usar para testar a aplicação com o plugin do VSCode [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client). Quando enviar dados na requisição, o Nest.js consumirá a mensagem e mostrará no console.
 
 ### Para Windows 
 

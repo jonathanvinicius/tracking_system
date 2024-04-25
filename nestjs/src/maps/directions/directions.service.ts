@@ -17,7 +17,7 @@ export class DirectionsService {
       origin: `place_id:${placeOriginId.replace('place_id:', '')}`,
       destination: `place_id:${placeDestinationId.replace('place_id:', '')}`,
       mode: TravelMode.driving,
-      key: 'AIzaSyBVdRLBnERkyB2YIet_E8iD_BsjPrjy_w8',
+      key: 'your_key_api_google_maps',
     };
     const { data } = await this.googleMapClient.directions({
       params: requestParams,
